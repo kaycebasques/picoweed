@@ -25,3 +25,7 @@ ninja -C out
 2. Press **Reset**.
 3. Mount the Pico as USB Mass Storage.
 4. `cp out/rp2040_pw_system.debug/obj/src/<app>.uf2 /media/<user>/RPI-RP2/`
+
+## Resources
+
+* [pico-examples](https://github.com/raspberrypi/pico-examples)

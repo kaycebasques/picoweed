@@ -5,7 +5,8 @@ Raspberry Pi Pico + Pigweed
 ## Setup
 
 ```
-git clone git@github.com:kaycebasques/picoweed.git
+git clone git@github.com:kaycebasques/picoweed.git --recursive
+# Only needed if you forgot to run `git clone` with `--recursive`.
 git submodule update --init --recursive
 source bootstrap.sh
 pw package install pico_sdk

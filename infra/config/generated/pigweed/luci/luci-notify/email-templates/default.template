@@ -1,0 +1,5 @@
+[Builder Status] {{.Build.Builder.Bucket}}/{{.Build.Builder.Builder}} {{with .Build.EndTime | time}}{{.Format "2006-01-02"}}{{end}}
+
+{{ template "summary" . }}
+
+{{ template "failed_steps" . }}

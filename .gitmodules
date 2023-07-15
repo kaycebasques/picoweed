@@ -1,0 +1,15 @@
+[submodule "third_party/pigweed"]
+	path = third_party/pigweed
+	url = https://pigweed.googlesource.com/pigweed/pigweed
+	branch = main
+[submodule "third_party/nanopb"]
+	path = third_party/nanopb
+	url = https://pigweed.googlesource.com/third_party/github/nanopb/nanopb
+	branch = main
+[submodule "infra/config"]
+	path = infra/config
+	url = https://pigweed.googlesource.com/infra/config
+	branch = main
+[submodule "third_party/freertos"]
+	path = third_party/freertos
+	url = https://pigweed.googlesource.com/third_party/github/FreeRTOS/FreeRTOS-Kernel

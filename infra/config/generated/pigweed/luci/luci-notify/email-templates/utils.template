@@ -1,0 +1,77 @@
+This file contains useful common templates that can be imported by other template files.
+
+{{- define "status_to_color" -}}
+{{- if eq . 12 }} {{/* SUCCESS */}}
+#049300
+{{- else if eq . 20 -}} {{/* FAILURE */}}
+#b50000
+{{- else if eq . 36 -}} {{/* INFRA FAILURE */}}
+#850093
+{{- else if eq . 68 -}} {{/* CANCELED */}}
+#c400aa
+{{- else -}}
+#000000
+{{- end -}}
+{{- end -}}
+
+{{ define "summary" -}}
+<table style="border: 0">
+  <tr>
+    <td style="text-align: right">Builder:</td>
+    <td><a href="https://ci.chromium.org/p/{{.Build.Builder.Project}}/builders/{{.Build.Builder.Bucket}}/{{.Build.Builder.Builder}}">{{.Build.Builder.Bucket}}/{{.Build.Builder.Builder}}</a></td>
+  </tr>
+
+  <tr>
+    <td style="text-align: right">Build:</td>
+    <td><a href="https://ci.chromium.org/b/{{.Build.Id}}">{{.Build.Id}}</a></td>
+  </tr>
+
+  <tr>
+    <td style="text-align: right">Status:</td>
+    <td><span style="color: #ffffff; background-color: {{- template "status_to_color" .Build.Status -}}; font-weight: bold">
+{{ .Build.Status }}
+</span></td>
+  </tr>
+
+  {{ if ne .OldStatus 0 -}}
+  <tr>
+    <td style="text-align: right">Previous status:</td>
+    <td>{{ .OldStatus }}</td>
+  </tr>
+  {{ end -}}
+
+  <tr>
+    <td style="text-align: right">Completed at:</td>
+    <td>{{ .Build.EndTime | time }}</td>
+  </tr>
+
+  {{ with .Build.GetInput.GetGitilesCommit -}}
+  <tr>
+    <td style="text-align: right">Triggered by:</td>
+    <td><a href="https://{{ .Host }}/{{ .Project }}/+/{{ .Id }}">{{ .Project }}/{{ .Id }}</a></td>
+  </tr>
+  {{ end -}}
+
+</table>
+{{ end -}}
+
+{{ define "failed_steps" }}
+{{/* If the build is a failure, show failed steps. */}}
+{{ if ne .Build.Status 12 -}}
+<br />
+Failed Steps:
+<ul>
+{{ range $step := .Build.Steps -}}
+{{ if ne $step.Status 12 -}}
+<li>{{ $step.Name }}</li>
+<ul>
+  {{ range $log := .Logs -}}
+  <li><a href="{{ $log.ViewUrl }}">{{ $log.Name }}</a></li>
+  {{ end -}}
+</ul>
+{{ end -}}
+{{ end -}}
+</ul>
+<br />
+{{ end -}}
+{{ end -}}

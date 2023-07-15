@@ -1,0 +1,11 @@
+[Roller Status] {{.Build.Builder.Builder}} {{with .Build.EndTime | time}}{{.Format "2006-01-02"}}{{end}}
+
+{{ template "summary" . }}
+
+{{ if .Build.SummaryMarkdown }}
+<div style="font-family: monospace; width: 100%">
+{{ .Build.SummaryMarkdown }}
+</div>
+{{ end -}}
+
+{{ template "failed_steps" . }}

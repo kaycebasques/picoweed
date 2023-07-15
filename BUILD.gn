@@ -31,7 +31,7 @@ group("default") {
 group("app") {
   deps = [
     "//src:app($dir_pigweed/targets/rp2040_pw_system:rp2040_pw_system.debug)",
-    "//src:app($dir_pigweed/targets/host_device_simulator:host_device_simulator.debug)",
+    # "//src:app($dir_pigweed/targets/host_device_simulator:host_device_simulator.debug)",
   ]
 }
 
